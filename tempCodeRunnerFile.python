@@ -1,0 +1,82 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Data for Design Criteria Matrix
+design_criteria_data = {
+    'Function No.': list(range(1, 19)),
+    'Function Description': [
+        'Conduct vulnerability assessments', 'Perform risk analysis', 'Design secure network architecture',
+        'Design data encryption modes', 'Devise hardware and software upgrades strategy', 'Create implementation plan',
+        'Create schedule', 'Allocate resources', 'Software upgrades', 'Hardware upgrades',
+        'Develop security patches', 'Develop data encryption and decryption system', 'Conduct testing and validation',
+        'Deploy solutions', 'Secure data migration processes', 'Continuous monitoring',
+        'Perform attack and vulnerability analysis', 'Periodic update patches'
+    ],
+    'Scalability': ['Medium', 'Medium', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High'],
+    'Redundancy': ['High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High'],
+    'Compliance': ['High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High'],
+    'Usability': ['High', 'Medium', 'Medium', 'Medium', 'Medium', 'High', 'High', 'High', 'High', 'High', 'Medium', 'Medium', 'High', 'Medium', 'Medium', 'Medium', 'Medium', 'Medium'],
+    'Interoperability': ['Medium', 'Medium', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High']
+}
+
+# Data for Performance Measures Matrix
+performance_measures_data = {
+    'Function No.': list(range(1, 19)),
+    'Function Description': [
+        'Conduct vulnerability assessments', 'Perform risk analysis', 'Design secure network architecture',
+        'Design data encryption modes', 'Devise hardware and software upgrades strategy', 'Create implementation plan',
+        'Create schedule', 'Allocate resources', 'Software upgrades', 'Hardware upgrades',
+        'Develop security patches', 'Develop data encryption and decryption system', 'Conduct testing and validation',
+        'Deploy solutions', 'Secure data migration processes', 'Continuous monitoring',
+        'Perform attack and vulnerability analysis', 'Periodic update patches'
+    ],
+    'Detection Rate': ['High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High'],
+    'Response Time': ['High', 'High', 'Medium', 'Medium', 'Medium', 'High', 'High', 'High', 'Medium', 'Medium', 'Medium', 'Medium', 'High', 'Medium', 'Medium', 'High', 'Medium', 'Medium'],
+    'System Uptime': ['High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High'],
+    'Data Integrity': ['High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High', 'High'],
+    'User Satisfaction': ['Medium', 'Medium', 'Medium', 'Medium', 'Medium', 'High', 'High', 'High', 'High', 'High', 'Medium', 'Medium', 'High', 'Medium', 'Medium', 'Medium', 'Medium', 'Medium']
+}
+
+# Convert data to DataFrames
+design_criteria_df = pd.DataFrame(design_criteria_data)
+performance_measures_df = pd.DataFrame(performance_measures_data)
+
+# Define a function to convert categorical data to numerical values
+def convert_to_numeric(df, columns):
+    conversion_dict = {'Low': 1, 'Medium': 2, 'High': 3}
+    for column in columns:
+        df[column] = df[column].map(conversion_dict)
+    return df
+
+# Convert the necessary columns
+design_criteria_df = convert_to_numeric(design_criteria_df, ['Scalability', 'Redundancy', 'Compliance', 'Usability', 'Interoperability'])
+performance_measures_df = convert_to_numeric(performance_measures_df, ['Detection Rate', 'Response Time', 'System Uptime', 'Data Integrity', 'User Satisfaction'])
+
+# Plotting Design Criteria
+plt.figure(figsize=(14, 10))
+for column in design_criteria_df.columns[2:]:
+    plt.plot(design_criteria_df['Function No.'], design_criteria_df[column], marker='o', label=column)
+plt.title('Design Criteria Matrix')
+plt.xlabel('Function No.')
+plt.ylabel('Rating')
+plt.ylim(0, 4)
+plt.xticks(np.arange(1, 19, 1))
+plt.yticks([1, 2, 3], ['Low', 'Medium', 'High'])
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# Plotting Performance Measures
+plt.figure(figsize=(14, 10))
+for column in performance_measures_df.columns[2:]:
+    plt.plot(performance_measures_df['Function No.'], performance_measures_df[column], marker='o', label=column)
+plt.title('Performance Measures Matrix')
+plt.xlabel('Function No.')
+plt.ylabel('Rating')
+plt.ylim(0, 4)
+plt.xticks(np.arange(1, 19, 1))
+plt.yticks([1, 2, 3], ['Low', 'Medium', 'High'])
+plt.legend()
+plt.grid(True)
+plt.show()

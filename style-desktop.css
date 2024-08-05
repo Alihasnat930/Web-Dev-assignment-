@@ -1,0 +1,16 @@
+/* Desktop styles */
+header {
+    padding: 30px;
+}
+
+nav ul li {
+    font-size: 18px;
+}
+
+main {
+    padding: 30px;
+}
+
+footer {
+    padding: 20px;
+}

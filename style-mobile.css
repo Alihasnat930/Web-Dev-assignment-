@@ -1,0 +1,17 @@
+/* Mobile styles */
+header {
+    padding: 15px;
+}
+
+nav ul li {
+    display: block;
+    margin: 10px 0;
+}
+
+main {
+    padding: 15px;
+}
+
+footer {
+    padding: 15px;
+}
